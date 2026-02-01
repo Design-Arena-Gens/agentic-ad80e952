@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free temporary email and SMS service with OTP detection">
+    <meta name="theme-color" content="#14b8a6">
+    <title>TempMail - Free Temporary Email & SMS</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body class="light">
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <span class="logo-text">TempMail</span>
+                </div>
+                <nav class="nav">
+                    <button class="btn-icon theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <svg class="icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                        <svg class="icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                        </svg>
+                    </button>
+                    <select class="lang-select" id="langSelect" aria-label="Select language">
+                        <option value="en">English</option>
+                        <option value="hi">हिन्दी</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="zh">中文</option>
+                        <option value="ja">日本語</option>
+                        <option value="ar">العربية</option>
+                        <option value="pt">Português</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                    <button class="btn-icon menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M3 12h18M3 6h18M3 18h18"/>
+                        </svg>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar Menu -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <div class="sidebar-content">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title" data-i18n="menu">Menu</h2>
+                <button class="btn-icon sidebar-close" id="sidebarClose" aria-label="Close menu">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="sidebar-link" data-i18n="dashboard">Dashboard</a>
+                <a href="#history" class="sidebar-link" data-i18n="history">History</a>
+                <a href="#settings" class="sidebar-link" data-i18n="settings">Settings</a>
+                <a href="#privacy" class="sidebar-link" id="privacyLink" data-i18n="privacy">Privacy Policy</a>
+                <a href="#help" class="sidebar-link" id="chatbotLink" data-i18n="help">Help & Support</a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Email Generator Section -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title" data-i18n="tempEmail">Temporary Email Address</h2>
+                    <button class="btn btn-primary" id="generateEmail" data-i18n="generate">Generate New</button>
+                </div>
+                <div class="email-display">
+                    <div class="input-group">
+                        <input type="text" class="input-field" id="emailField" readonly>
+                        <button class="btn-icon copy-btn" id="copyEmail" aria-label="Copy email">
+                            <svg class="icon copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                            </svg>
+                            <svg class="icon check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Password Generator Section -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title" data-i18n="securePassword">Secure Password</h2>
+                    <button class="btn btn-secondary" id="generatePassword" data-i18n="generate">Generate New</button>
+                </div>
+                <div class="password-display">
+                    <div class="input-group">
+                        <input type="text" class="input-field" id="passwordField" readonly>
+                        <button class="btn-icon copy-btn" id="copyPassword" aria-label="Copy password">
+                            <svg class="icon copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                            </svg>
+                            <svg class="icon check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="strength-meter">
+                        <div class="strength-bar" id="strengthBar"></div>
+                    </div>
+                    <p class="strength-text" id="strengthText" data-i18n="weak">Weak</p>
+                </div>
+            </section>
+
+            <!-- SMS/OTP Inbox Section -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title" data-i18n="smsInbox">SMS & OTP Inbox</h2>
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <svg class="icon search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                            </svg>
+                            <input type="text" class="search-input" id="searchInput" placeholder="Search messages..." data-i18n-placeholder="searchMessages">
+                        </div>
+                        <button class="btn btn-secondary" id="refreshMessages" data-i18n="refresh">Refresh</button>
+                    </div>
+                </div>
+                <div class="messages-container" id="messagesContainer">
+                    <!-- Messages will be inserted here -->
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-outline" id="loadMore" data-i18n="loadMore">Load More</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M20 6L9 17l-5-5"/>
+        </svg>
+        <span id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div class="modal" id="privacyModal">
+        <div class="modal-overlay" id="privacyOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" data-i18n="privacyPolicy">Privacy Policy</h2>
+                <button class="btn-icon modal-close" id="privacyClose" aria-label="Close modal">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p data-i18n="privacyContent">This is a client-side only application. No data is sent to any server. All emails, passwords, and messages are generated and stored locally in your browser using IndexedDB and localStorage. Your privacy is our priority.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Modal -->
+    <div class="modal" id="chatbotModal">
+        <div class="modal-overlay" id="chatbotOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" data-i18n="helpSupport">Help & Support</h2>
+                <button class="btn-icon modal-close" id="chatbotClose" aria-label="Close modal">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body chatbot-body">
+                <div class="chatbot-messages" id="chatbotMessages">
+                    <div class="chat-message bot-message">
+                        <p data-i18n="chatbotWelcome">Welcome! How can I help you today?</p>
+                        <div class="quick-replies">
+                            <button class="quick-reply" data-question="how-to-use" data-i18n="howToUse">How to use?</button>
+                            <button class="quick-reply" data-question="is-safe" data-i18n="isSafe">Is it safe?</button>
+                            <button class="quick-reply" data-question="how-long" data-i18n="howLong">How long stored?</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Section (Hidden by default) -->
+    <section class="dashboard-section" id="dashboardSection" style="display: none;">
+        <div class="container">
+            <div class="card">
+                <h2 class="card-title" data-i18n="dashboard">Dashboard</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 class="stat-value" id="emailsCount">0</h3>
+                        <p class="stat-label" data-i18n="emailsGenerated">Emails Generated</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-value" id="messagesCount">0</h3>
+                        <p class="stat-label" data-i18n="messagesReceived">Messages Received</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="stat-value" id="storageUsed">0 KB</h3>
+                        <p class="stat-label" data-i18n="storageUsed">Storage Used</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
